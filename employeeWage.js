@@ -49,4 +49,5 @@ class Employee{
 
 let employee = new Employee().dailywages();
 let result = new Employee().calculateWage();
+
 console.log(`Employee Wages are ${result}`);
