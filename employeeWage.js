@@ -1,23 +1,28 @@
-console.log("Welcome to employee wage problem");
+console.log("Welcome to employee wage ");
 
 let IS_FULL_TIME = 1;
 let IS_PART_TIME = 2;
-
 let Emp_Rate_Per_Hr = 20;
 let IS_ABSENT = 0;
 let empHrs = 0;
-let empWage = 0;
+let totalempWage = 0;
 let Working_Day_Per_Hour = 20;
+let Max_Hr_in_month = 100;
+let Num_of_working_days = 10
 
 
 class Employee{
 
     constructor(){}
 
-    monthlyWages(){
-        for(let day=0 ; day< Working_Day_Per_Hour; day++){
-            let empCheck = Math.floor(Math.random() * 3);
-            switch(empCheck){
+    getWorking(){
+        let totalEmpHRs= 0;
+        let totalWorkingDays = 0;
+        while(totalEmpHRs <= Max_Hr_in_month && totalWorkingDays< Num_of_working_days ){
+            totalWorkingDays++;
+        
+        let empCheck = Math.floor(Math.random() * 3);
+        switch(empCheck){
             case IS_FULL_TIME:
                 empHrs = 8;
                 break;
@@ -30,13 +35,14 @@ class Employee{
                 empHrs = 0;
                 break;
             } 
-        empWage = empHrs * Emp_Rate_Per_Hr;
-        let monthlyWage =+ empWage;
-        return monthlyWage;
+            totalWorkingDays += empHrs;
+           
         }
-    }   
-}
+        totalempWage = empHrs * Emp_Rate_Per_Hr;
+        console.log(`Total Days: ${totalWorkingDays} employee Hours ${empHrs} employee Wage ${totalempWage}`);
 
-let result = new Employee().monthlyWages();
+        }
+}   
 
-console.log(`monthly Wages ${result}`);
+let result = new Employee().getWorking();
+
