@@ -7,24 +7,16 @@ let Emp_Rate_Per_Hr = 20;
 let IS_ABSENT = 0;
 let empHrs = 0;
 let empWage = 0;
-let empCheck = Math.floor(Math.random() * 10 ) % 3;
+let Working_Day_Per_Hour = 20;
+
 
 class Employee{
 
     constructor(){}
-     attendance(){
-            if(empCheck == IS_ABSENT)
-            {
-                console.log("UC1-Employee is ABSENT");
-    
-            }
-            else{
-                console.log("UC1-Employee is PRESENT");
-             }
-            return empCheck;
-        }
-    
-        dailywages(){
+
+    monthlyWages(){
+        for(let day=0 ; day< Working_Day_Per_Hour; day++){
+            let empCheck = Math.floor(Math.random() * 3);
             switch(empCheck){
             case IS_FULL_TIME:
                 empHrs = 8;
@@ -38,16 +30,13 @@ class Employee{
                 empHrs = 0;
                 break;
             } 
-            return empCheck;
+        empWage = empHrs * Emp_Rate_Per_Hr;
+        let monthlyWage =+ empWage;
+        return monthlyWage;
         }
-
-        calculateWage(){
-            empWage = empHrs * Emp_Rate_Per_Hr;
-            return empWage;
-        }
+    }   
 }
 
-let employee = new Employee().dailywages();
-let result = new Employee().calculateWage();
+let result = new Employee().monthlyWages();
 
-console.log(`Employee Wages are ${result}`);
+console.log(`monthly Wages ${result}`);
