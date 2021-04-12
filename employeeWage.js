@@ -1,48 +1,54 @@
-console.log("Welcome to employee wage ");
 
-let IS_FULL_TIME = 1;
-let IS_PART_TIME = 2;
-let Emp_Rate_Per_Hr = 20;
-let IS_ABSENT = 0;
-let empHrs = 0;
-let totalempWage = 0;
-let Working_Day_Per_Hour = 20;
-let Max_Hr_in_month = 100;
-let Num_of_working_days = 10
-
-
-class Employee{
-
-    constructor(){}
-
-    getWorking(){
-        let totalEmpHRs= 0;
-        let totalWorkingDays = 0;
-        while(totalEmpHRs <= Max_Hr_in_month && totalWorkingDays< Num_of_working_days ){
-            totalWorkingDays++;
-        
-        let empCheck = Math.floor(Math.random() * 3);
-        switch(empCheck){
-            case IS_FULL_TIME:
-                empHrs = 8;
-                break;
-
-            case IS_PART_TIME:
-                empHrs = 4;
-                break;
-
-            default:
-                empHrs = 0;
-                break;
-            } 
-            totalWorkingDays += empHrs;
+    const IS_PART_TIME = 1;
+    const IS_FULL_TIME = 2;
+    const PART_TIME_HOUR = 4;
+    const FULL_TIME_HOUR = 8;
+    const WAGE_PER_HOUR = 20;
+    const WORKING_HOURS = 20;
+    const MAX_HR_IN_MONTH = 160;
+    const NUM_OF_WORKING_DAYS =20;
+    let empHrs = 0;   
+    
+  class employee  {
+      constructor(){}
+    
+        getWorkingHours =(empCheck)=>{     
            
+           switch(empCheck)
+            {
+                case IS_PART_TIME:
+                     empHrs = PART_TIME_HOUR;
+                     break;
+                
+                case IS_FULL_TIME:
+                     empHrs = FULL_TIME_HOUR;
+                     break;
+                 default:
+                    empHrs = 0 ;
+                    break;
+            }
+            return empCheck;
         }
-        totalempWage = empHrs * Emp_Rate_Per_Hr;
-        console.log(`Total Days: ${totalWorkingDays} employee Hours ${empHrs} employee Wage ${totalempWage}`);
 
+        calDailyWage=(empHrs)=> {
+            return empHrs * WAGE_PER_HOUR;
         }
-}   
 
-let result = new Employee().getWorking();
+        calWages=() =>{
+        let totalEmpHrs = 0;
+        let totalWorkingDays = 0;
+        let empDailyWAgeArr = new Array();
+        while(totalEmpHrs <= MAX_HR_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+            totalWorkingDays++;
+            let empCheck = Math.floor(Math.random()*10) % 3;
+            totalEmpHrs = totalEmpHrs + this.getWorkingHours(empCheck);
+            empDailyWAgeArr.push(this.calDailyWage(totalEmpHrs));
+            console.log(empDailyWAgeArr);
+        }
 
+        let empWage = this.calDailyWage(totalEmpHrs);
+        console.log("Total Days: " + totalWorkingDays +" Employee Hours: " + totalEmpHrs +" Emp Wage: "+ empWage);
+        }
+}
+
+const result = new employee().calWages();
