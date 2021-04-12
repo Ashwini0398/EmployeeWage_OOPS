@@ -11,8 +11,8 @@
     let totalEmpHrs = 0;
     let totalWorkingDays = 0;
     let empDailyWAgeArr = new Array();
+    let mapDayWithWageArr = new Map();
     let dailyCntr = 0;
-    let mapDayWithWageArr;
     
   class employee  {
       constructor(){}
@@ -39,37 +39,26 @@
             return empHrs * WAGE_PER_HOUR;
         }
 
-      
-        calDailyHRs(dailyHrs){
-            let totalEmpHrs = 0;
-                totalEmpHrs += dailyHrs;
-                return totalEmpHrs;
-        }
-
-        mapDayWithWage(dailyWage){
-            dailyCntr++;
-            return dailyCntr + "=" + dailyWage;
-        }
-
         calWages=() =>{
        
         while(totalEmpHrs <= MAX_HR_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
             totalWorkingDays++;
             let empCheck = Math.floor(Math.random()*10) % 3;
+            empHrs = this.getWorkingHours(empCheck);
+            totalEmpHrs += empHrs;
             totalEmpHrs = totalEmpHrs + this.getWorkingHours(empCheck);
             empDailyWAgeArr.push(this.calDailyWage(totalEmpHrs));
+            mapDayWithWageArr.set(totalWorkingDays,this.calDailyWage(empHrs));
 
         }
-
+        console.log(mapDayWithWageArr);
         let empWage = this.calDailyWage(totalEmpHrs);
-        console.log("Total Days: " + totalWorkingDays +" Employee Hours: " + totalEmpHrs +" Emp Wage: "+ empWage);4
+        console.log("Total Days: " + totalWorkingDays +" Employee Hours: " + totalEmpHrs +" Emp Wage: "+ empWage);
+        let totalWages = (totalWage,dailyWage) => totalWage + dailyWage;
+        console.log("UC8 - Emp Wage with reduce " +
+                     Array.from(mapDayWithWageArr.values()).reduce(totalWages,0));
     
-        empDailyWAgeArr.forEach(this.calDailyHRs);
-        console.log(`total working hours are: ${totalEmpHrs}`);
-
-        let mapDayWithWageArr = empDailyWAgeArr.map(this.mapDayWithWage);
-        console.log("Total emp wage " +mapDayWithWageArr);
-
+        
         }
         
     }
