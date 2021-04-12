@@ -8,6 +8,11 @@
     const MAX_HR_IN_MONTH = 160;
     const NUM_OF_WORKING_DAYS =20;
     let empHrs = 0;   
+    let totalEmpHrs = 0;
+    let totalWorkingDays = 0;
+    let empDailyWAgeArr = new Array();
+    let dailyCntr = 0;
+    let mapDayWithWageArr;
     
   class employee  {
       constructor(){}
@@ -34,21 +39,31 @@
             return empHrs * WAGE_PER_HOUR;
         }
 
+      
+        calDailyHRs(dailyHrs){
+            let totalEmpHrs = 0;
+                totalEmpHrs += dailyHrs;
+                return totalEmpHrs;
+        }
+
         calWages=() =>{
-        let totalEmpHrs = 0;
-        let totalWorkingDays = 0;
-        let empDailyWAgeArr = new Array();
+       
         while(totalEmpHrs <= MAX_HR_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
             totalWorkingDays++;
             let empCheck = Math.floor(Math.random()*10) % 3;
             totalEmpHrs = totalEmpHrs + this.getWorkingHours(empCheck);
             empDailyWAgeArr.push(this.calDailyWage(totalEmpHrs));
-            console.log(empDailyWAgeArr);
+
         }
 
         let empWage = this.calDailyWage(totalEmpHrs);
-        console.log("Total Days: " + totalWorkingDays +" Employee Hours: " + totalEmpHrs +" Emp Wage: "+ empWage);
+        console.log("Total Days: " + totalWorkingDays +" Employee Hours: " + totalEmpHrs +" Emp Wage: "+ empWage);4
+    
+        empDailyWAgeArr.forEach(this.calDailyHRs);
+        console.log(`total working hours are: ${totalEmpHrs}`)
+
         }
-}
+        
+    }
 
 const result = new employee().calWages();
