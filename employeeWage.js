@@ -46,6 +46,11 @@
                 return totalEmpHrs;
         }
 
+        mapDayWithWage(dailyWage){
+            dailyCntr++;
+            return dailyCntr + "=" + dailyWage;
+        }
+
         calWages=() =>{
        
         while(totalEmpHrs <= MAX_HR_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
@@ -60,7 +65,10 @@
         console.log("Total Days: " + totalWorkingDays +" Employee Hours: " + totalEmpHrs +" Emp Wage: "+ empWage);4
     
         empDailyWAgeArr.forEach(this.calDailyHRs);
-        console.log(`total working hours are: ${totalEmpHrs}`)
+        console.log(`total working hours are: ${totalEmpHrs}`);
+
+        let mapDayWithWageArr = empDailyWAgeArr.map(this.mapDayWithWage);
+        console.log("Total emp wage " +mapDayWithWageArr);
 
         }
         
